@@ -31,3 +31,13 @@ In the Battleship game:
 - **Computer's Response**: Indicate "hit" or "miss".
 - **Ship Sinking**: Notify the player when a ship has been sunk.
 - **Game Over**: End the game when all ships have been sunk.
+
+### Steps to Set Up:
+
+1. **Clone the Repository**:
+   First, clone the project repository to your local machine:
+   ```bash
+   git clone https://github.com/oreshkin-ay/battleship-game
+   cd battleship-game
+   npm install
+   npm run dev

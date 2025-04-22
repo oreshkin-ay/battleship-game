@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Board from './components/Board';
 import styles from './App.module.css';
 import { ScoreBoard } from './components/ScoreBoard';
+import { GameStatus } from './components/GameStatus';
 import { ShipStatusList } from './components/ShipStatusList';
 import Carrier from './assets/Carrier Shape.png';
 import Battleship from './assets/Battleship Shape.png';
@@ -71,7 +72,8 @@ export const SHIP_LAYOUT: ShipLayout[] = [
 export default function App() {
   const [hits, setHits] = useState<Position[]>([]);
   const [misses, setMisses] = useState<Position[]>([]);
-  const [sunkShips, setSunkShips] = useState(new Map());
+  const [sunkShipsCount, setSunkShipsCount] = useState(new Map());
+  const [sunkShipsList, setSunkShipsList] = useState<string[]>([]);
   const [player1Score, setPlayer1Score] = useState(0);
 
   const handleCellClick = (row: number, col: number) => {
@@ -86,8 +88,17 @@ export default function App() {
       setHits((prevHits) => [...prevHits, [row, col]]);
 
       setPlayer1Score((prev) => prev + 1);
+      const shipPositions = shipHit.positions;
+      const newHits = [...hits, [row, col]];
+      const isSunk = shipPositions.every((pos) =>
+        newHits.some((hit) => hit[0] === pos[0] && hit[1] === pos[1]),
+      );
 
-      setSunkShips((prev) => {
+      if (isSunk && !sunkShipsList.includes(shipHit.ship)) {
+        setSunkShipsList((prev) => [...prev, shipHit.ship]);
+      }
+
+      setSunkShipsCount((prev) => {
         const newSunkShips = new Map(prev);
         newSunkShips.set(
           shipHit.ship,
@@ -106,12 +117,26 @@ export default function App() {
     return 'unknown';
   };
 
+  if (sunkShipsCount.size === SHIP_LAYOUT.length) {
+    return (
+      <GameStatus
+        reloadGame={() => {
+          setHits([]);
+          setMisses([]);
+          setSunkShipsCount(new Map());
+          setSunkShipsList([]);
+          setPlayer1Score(0);
+        }}
+      />
+    );
+  }
+
   return (
     <div className={styles.app}>
       <div className={styles.layout}>
         <div className={styles.sidebar}>
           <ScoreBoard player1Score={player1Score} player2Score={0} />
-          <ShipStatusList sunkShips={sunkShips} />
+          <ShipStatusList sunkShipsCount={sunkShipsCount} />
         </div>
         <div className={styles.boardWrapper}>
           <Board onCellClick={handleCellClick} checkCellStatus={checkCellStatus} />

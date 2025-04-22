@@ -4,10 +4,10 @@ import { ShipStatusItem } from '../ShipStatusItem';
 import { SHIP_LAYOUT } from '../../App';
 
 interface ShipStatusListProps {
-  sunkShips: Map<string, number>;
+  sunkShipsCount: Map<string, number>;
 }
 
-export const ShipStatusList: React.FC<ShipStatusListProps> = ({ sunkShips }) => {
+export const ShipStatusList: React.FC<ShipStatusListProps> = ({ sunkShipsCount }) => {
   return (
     <div className={styles.container}>
       {SHIP_LAYOUT.map((ship, index) => (
@@ -15,7 +15,7 @@ export const ShipStatusList: React.FC<ShipStatusListProps> = ({ sunkShips }) => 
           key={index}
           shipIcon={<img src={ship.src} alt={`Ship ${index}`} />}
           total={ship.positions.length}
-          hits={sunkShips.get(ship.ship) || 0} // Use the ship name to get the hits from the map
+          hits={sunkShipsCount.get(ship.ship) || 0}
         />
       ))}
     </div>

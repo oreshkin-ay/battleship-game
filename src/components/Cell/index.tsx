@@ -5,8 +5,6 @@ import hitIcon from '../../assets/Hit.png';
 import missIcon from '../../assets/Miss.png';
 
 interface CellProps {
-  // row: number;
-  // col: number;
   status: 'hit' | 'miss' | 'unknown';
   onClick: () => void;
 }

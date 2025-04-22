@@ -1,7 +1,6 @@
 import React from 'react';
 import Cell from '../Cell';
 import styles from './Board.module.css';
-('');
 
 interface BoardProps {
   onCellClick: (row: number, col: number) => void;

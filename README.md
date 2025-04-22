@@ -1,12 +1,33 @@
-# React + Vite
+# Project Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## React + Vite
+
+This template provides a minimal setup to get React working in Vite with Hot Module Replacement (HMR) and some ESLint rules.
 
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Battleship Game Design and Implementation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Design and implement a (partial) Battleship game as a web app.
+
+### Game Overview
+
+In the Battleship game:
+
+- The computer positions five ships of various sizes on a 10x10 board.
+- Each ship must be placed horizontally or vertically, without overlapping another ship.
+- The player cannot see the ship locations.
+- Each round, the player "fires" at a board position of their choosing.
+- The computer responds with whether it was a "hit" or a "miss".
+- When all tiles of a particular ship have been hit, the computer will indicate that the entire ship has been sunk.
+- The game ends when all of the ships have been sunk.
+
+### Game Features
+
+- **Player's Turn**: Select a position to fire.
+- **Computer's Response**: Indicate "hit" or "miss".
+- **Ship Sinking**: Notify the player when a ship has been sunk.
+- **Game Over**: End the game when all ships have been sunk.
